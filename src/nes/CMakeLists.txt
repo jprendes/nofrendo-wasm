@@ -8,3 +8,5 @@ add_library(nofrendo-nes
     nesinput.c
     nesstate.c
 )
+
+target_link_libraries(nofrendo-nes nofrendo-cpu nofrendo-mappers nofrendo-snss nofrendo-core)

@@ -41,3 +41,5 @@ add_library(nofrendo-mappers
     map231.c
     mapvrc.c
 )
+
+target_link_libraries(nofrendo-mappers nofrendo-sndhrdw)

@@ -29,4 +29,5 @@ target_link_libraries(nofrendo
     nofrendo-mappers
     nofrendo-nes
     nofrendo-sndhrdw
+    m
 )
