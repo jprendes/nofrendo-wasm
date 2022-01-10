@@ -3,6 +3,7 @@ add_subdirectory(libsnss)
 add_subdirectory(mappers)
 add_subdirectory(nes)
 add_subdirectory(sndhrdw)
+add_subdirectory(osd)
 
 add_library(nofrendo-core
     bitmap.c
@@ -19,7 +20,7 @@ add_library(nofrendo-core
 )
 
 add_executable(nofrendo
-    main.cpp
+    main.c
 )
 
 target_link_libraries(nofrendo
@@ -29,5 +30,6 @@ target_link_libraries(nofrendo
     nofrendo-mappers
     nofrendo-nes
     nofrendo-sndhrdw
+    nofrendo-osd
     m
 )
