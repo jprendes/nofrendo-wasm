@@ -61,6 +61,8 @@ static void map5_write(uint32 address, uint8 value)
 {
    static int page_size = 8;
 
+   UNUSED(page_size);
+
    /* ex-ram memory-- bleh! */
    if (address >= 0x5C00 && address <= 0x5FFF)
       return;

@@ -314,7 +314,9 @@ static int rom_getheader(FILE *fp, rominfo_t *rominfo)
 #define RESERVED_LENGTH 8
    inesheader_t head;
    uint8 reserved[RESERVED_LENGTH];
-   bool header_dirty;
+   bool header_dirty = false;
+
+   UNUSED(header_dirty);
 
    ASSERT(fp);
    ASSERT(rominfo);

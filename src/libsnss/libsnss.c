@@ -19,6 +19,9 @@
 /* This section deals with endian-specific code. */
 /**************************************************************************/
 
+static SNSS_FILE *snssFileBlock;
+static char *blockBytes;
+
 static unsigned int
 swap32(unsigned int source)
 {
@@ -674,7 +677,7 @@ static SNSS_RETURN_CODE
 SNSS_ReadControllersBlock(SNSS_FILE *snssFile)
 {
    /* quell warnings */
-   snssFile = snssFile;
+   UNUSED(snssFile);
 
    return SNSS_OK;
 }
@@ -685,7 +688,7 @@ static SNSS_RETURN_CODE
 SNSS_WriteControllersBlock(SNSS_FILE *snssFile)
 {
    /* quell warnings */
-   snssFile = snssFile;
+   UNUSED(snssFile);
 
    return SNSS_OK;
 }

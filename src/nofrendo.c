@@ -137,7 +137,7 @@ static system_t detect_systemtype(const char *filename)
 static int install_timer(int hertz)
 {
    return osd_installtimer(hertz, (void *)timer_isr,
-                           (int)timer_isr_end - (int)timer_isr,
+                           (uint_ptr)timer_isr_end - (uint_ptr)timer_isr,
                            (void *)&nofrendo_ticks,
                            sizeof(nofrendo_ticks));
 }

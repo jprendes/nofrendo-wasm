@@ -92,7 +92,7 @@ static viddriver_t *driver = NULL;
 INLINE int vid_memcmp(const void *p1, const void *p2, int len)
 {
    /* check for 32-bit aligned data */
-   if (0 == (((uint32)p1 & 3) | ((uint32)p2 & 3)))
+   if (0 == (((uint_ptr)p1 & 3) | ((uint_ptr)p2 & 3)))
    {
       uint32 *dw1 = (uint32 *)p1;
       uint32 *dw2 = (uint32 *)p2;

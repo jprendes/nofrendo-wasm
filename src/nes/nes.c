@@ -350,8 +350,7 @@ static void system_video(bool draw)
 
 #ifdef NOFRENDO_DOUBLE_FRAMEBUFFER
    /* blit the NES screen to our video surface */
-   vid_blit(nes.vidbuf, 0, (NES_SCREEN_HEIGHT - NES_VISIBLE_HEIGHT) / 2,
-            0, 0, NES_SCREEN_WIDTH, NES_VISIBLE_HEIGHT);
+   vid_blit(nes.vidbuf, 0, 0, 0, 0, NES_SCREEN_WIDTH, NES_SCREEN_HEIGHT);
 #endif /* NOFRENDO_DOUBLE_FRAMEBUFFER */
 
    /* overlay our GUI on top of it */

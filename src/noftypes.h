@@ -27,15 +27,14 @@
 #define _NOFTYPES_H_
 
 #include <stdbool.h>
+#include <stddef.h>
+#include <stdint.h>
 
-#define NOFRENDO_DEBUG
-#define NOFRENDO_MEM_DEBUG
+// #define NOFRENDO_DEBUG
+// #define NOFRENDO_MEM_DEBUG
 // #define NOFRENDO_VRAM_DEBUG
 // #define NOFRENDO_LOG_TO_FILE
-/* For the ESP32, it costs too much memory to render to a separate buffer and blit that to the main buffer.
-   Instead, the code has been modified to directly grab the primary buffer from the video subsystem and render
-   there, saving us about 64K of memory. */
-// #define NOFRENDO_DOUBLE_FRAMEBUFFER
+#define NOFRENDO_DOUBLE_FRAMEBUFFER
 
 /* Define this if running on little-endian (x86) systems */
 #define HOST_LITTLE_ENDIAN
@@ -52,14 +51,15 @@
 #endif
 
 /* quell stupid compiler warnings */
-#define UNUSED(x) ((x) = (x))
+#define UNUSED(x) ((void)(x))
 
-typedef signed char int8;
-typedef signed short int16;
-typedef signed int int32;
-typedef unsigned char uint8;
-typedef unsigned short uint16;
-typedef unsigned int uint32;
+typedef int8_t int8;
+typedef int16_t int16;
+typedef int32_t int32;
+typedef uint8_t uint8;
+typedef uint16_t uint16;
+typedef uint32_t uint32;
+typedef size_t uint_ptr;
 
 #include "memguard.h"
 #include "log.h"
