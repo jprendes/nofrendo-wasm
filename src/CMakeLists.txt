@@ -1,3 +1,9 @@
+add_subdirectory(cpu)
+add_subdirectory(libsnss)
+add_subdirectory(mappers)
+add_subdirectory(nes)
+add_subdirectory(sndhrdw)
+
 add_library(nofrendo-core
     bitmap.c
     config.c
