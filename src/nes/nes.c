@@ -366,24 +366,22 @@ static void system_video(bool draw)
 /* main emulation loop */
 void nes_emulate(void)
 {
-   int last_ticks, frames_to_render;
+   int frames_to_render;
 
    osd_setsound(nes.apu->process);
 
-   last_ticks = nofrendo_ticks;
    frames_to_render = 0;
    nes.scanline_cycles = 0;
    nes.fiq_cycles = (int)NES_FIQ_PERIOD;
 
    while (false == nes.poweroff)
    {
-      if (nofrendo_ticks != last_ticks)
-      {
-         int tick_diff = nofrendo_ticks - last_ticks;
+      int tick_diff = osd_ticks(frames_to_render == 0);
 
+      if (tick_diff > 0)
+      {
          frames_to_render += tick_diff;
          gui_tick(tick_diff);
-         last_ticks = nofrendo_ticks;
       }
 
       if (true == nes.pause)

@@ -20,7 +20,7 @@ add_library(nofrendo-core
 )
 
 add_executable(nofrendo
-    main.c
+    main.cpp
 )
 
 target_link_libraries(nofrendo

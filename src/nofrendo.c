@@ -55,14 +55,6 @@ static struct
    bool quit;
 } console;
 
-/* our happy little timer ISR */
-volatile int nofrendo_ticks = 0;
-static void timer_isr(void)
-{
-   nofrendo_ticks++;
-}
-static void timer_isr_end(void) {} /* code marker for djgpp */
-
 static void shutdown_everything(void)
 {
    if (console.filename)
@@ -136,10 +128,8 @@ static system_t detect_systemtype(const char *filename)
 
 static int install_timer(int hertz)
 {
-   return osd_installtimer(hertz, (void *)timer_isr,
-                           (uint_ptr)timer_isr_end - (uint_ptr)timer_isr,
-                           (void *)&nofrendo_ticks,
-                           sizeof(nofrendo_ticks));
+   osd_ticks_frequency(hertz);
+   return 0;
 }
 
 /* This assumes there is no current context */

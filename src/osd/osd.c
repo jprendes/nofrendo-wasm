@@ -20,6 +20,15 @@ extern void *mem_alloc(int size, bool prefer_fast_memory) {
 	return malloc(size);
 }
 
+/* time keeping */
+void osd_ticks_frequency(int hertz) {
+	time_write_frequency(hertz);
+}
+
+int osd_ticks(bool blocking) {
+	return time_read_ticks(blocking);
+}
+
 /* audio */
 #define DEFAULT_SAMPLERATE 22050
 #define DEFAULT_FRAGSIZE 1024
@@ -36,6 +45,7 @@ static void do_audio_frame() {
 			n = left;
 		audio_callback(audio_frame, n); //get more data
 		sound_write_frame(audio_frame, n);
+		left -= n;
 	}
 }
 
@@ -183,11 +193,14 @@ int osd_init()
 	display_init();
 	controller_init();
 	sound_init();
+	time_init();
+
 	return 0;
 }
 
 void osd_shutdown()
 {
+	time_stop();
 	sound_stop();
 	controller_stop();
 	display_stop();

@@ -55,6 +55,10 @@
 /* memory allocation */
 extern void *mem_alloc(int size, bool prefer_fast_memory);
 
+/* time keeping */
+extern void osd_ticks_frequency(int hertz);
+extern int osd_ticks(bool blocking);
+
 /* audio */
 extern void osd_setsound(void (*playfunc)(void *buffer, int size));
 
