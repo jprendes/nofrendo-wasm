@@ -1,6 +1,7 @@
 #include "nofrendo.h"
 
 #include "osd/external.h"
+#include "nes/nes.h"
 
 #include <chrono>
 #include <thread>
@@ -11,9 +12,25 @@ uint32 controller_read_input() { return 0; }
 void controller_stop() {}
 
 /* display */
+namespace {
+
+uint32 nes_palette[256];
+uint32 nes_screen[NES_SCREEN_HEIGHT][NES_SCREEN_WIDTH];
+
+}
+
 void display_init() {}
-void display_write_palette(const uint32 palette[]) {}
-void display_write_frame(const uint8 *data[]) {}
+void display_write_palette(const uint32 p[]) {
+    for (int i = 0; i < 256; ++i)
+        nes_palette[i] = ( p[i] << 8 ) | 0xFF000000;
+}
+void display_write_frame(const uint8 *data[]) {
+    for (int l = 0; l < NES_SCREEN_HEIGHT; ++l) {
+        for (int c = 0; c < NES_SCREEN_WIDTH; ++c) {
+            nes_screen[l][c] = nes_palette[data[l][c]];
+        }
+    }
+}
 void display_clear() {}
 void display_stop() {}
 
