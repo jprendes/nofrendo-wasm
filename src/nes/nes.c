@@ -250,12 +250,12 @@ static void build_address_handlers(nes_t *machine)
 /* raise an IRQ */
 void nes_irq(void)
 {
-#ifdef NOFRENDO_DEBUG
-#ifdef NOFRENDO_DOUBLE_FRAMEBUFFER
+// #ifdef NOFRENDO_DEBUG
+// #ifdef NOFRENDO_DOUBLE_FRAMEBUFFER
    if (nes.scanline <= NES_SCREEN_HEIGHT)
       memset(nes.vidbuf->line[nes.scanline - 1], GUI_RED, NES_SCREEN_WIDTH);
-#endif /* NOFRENDO_DOUBLE_FRAMEBUFFER */
-#endif /* NOFRENDO_DEBUG */
+// #endif /* NOFRENDO_DOUBLE_FRAMEBUFFER */
+// #endif /* NOFRENDO_DEBUG */
 
    nes6502_irq();
 }

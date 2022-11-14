@@ -1,0 +1,58 @@
+<canvas id="canvas" width="256px" height="240px"></canvas>
+<script>
+    const canvas = document.getElementById("canvas");
+    const ctx = canvas.getContext("2d");
+
+    const WIDTH = 256;
+    const HEIGHT = 240;
+
+    const controller_events = Object.fromEntries([
+		"joypad1_up", "joypad1_down", "joypad1_left", "joypad1_right",
+		"joypad1_select", "joypad1_start", "joypad1_a", "joypad1_b",
+
+		"joypad2_up", "joypad2_down", "joypad2_left", "joypad2_right",
+		"joypad2_select", "joypad2_start", "joypad2_a", "joypad2_b",
+
+		"state_save", "state_load"
+    ].map((key, i) => [key, i]));
+
+    const key_map = {
+        "ArrowLeft": controller_events.joypad1_left,
+        "ArrowRight": controller_events.joypad1_right,
+        "ArrowUp": controller_events.joypad1_up,
+        "ArrowDown": controller_events.joypad1_down,
+        "KeyA": controller_events.joypad1_a,
+        "KeyS": controller_events.joypad1_b,
+        "Space": controller_events.joypad1_select,
+        "Enter": controller_events.joypad1_start,
+        "NumpadEnter": controller_events.joypad1_start,
+    };
+
+    let controller_input = 0x00000000;
+    document.body.addEventListener("keydown", (evt) => {
+        if (evt.code in key_map) {
+            controller_input = controller_input | (1 << key_map[evt.code]);
+        }
+    });
+    document.body.addEventListener("keyup", (evt) => {
+        if (evt.code in key_map) {
+            controller_input = controller_input & ~(1 << key_map[evt.code]);
+        }
+    });
+
+    var Module = {
+        display_write_frame: (data) => {
+            const pixels = new Uint8ClampedArray(data);
+            const imageData = new ImageData(pixels, WIDTH, HEIGHT);
+            ctx.putImageData(imageData, 0, 0);
+        },
+        controller_read_input: () => {
+            return ~controller_input;
+        },
+        noExitRuntime: true,
+        onRuntimeInitialized: () => {
+            Module.ccall("run_nofrendo", null, ["string"], ["/rom.nes"], {async: true});
+        }
+    };
+</script>
+<script src="./nofrendo.js"></script>

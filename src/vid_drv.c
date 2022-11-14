@@ -88,6 +88,7 @@ static viddriver_t *driver = NULL;
       }                                 \
    }
 
+#if 0
 /* some system dependent replacement routines (for speed) */
 INLINE int vid_memcmp(const void *p1, const void *p2, int len)
 {
@@ -112,6 +113,7 @@ INLINE int vid_memcmp(const void *p1, const void *p2, int len)
 
    return 0;
 }
+#endif
 
 /* super-dooper assembly memcpy (thanks, SDL!) */
 #if defined(__GNUC__) && defined(i386)

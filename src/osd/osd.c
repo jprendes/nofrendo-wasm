@@ -81,7 +81,7 @@ static void set_palette(rgb_t *pal)
 {
 	for (int i = 0; i < 256; i++)
 	{
-		palette[i] = ((pal[i].r & 0xFF) << 16) | ((pal[i].g & 0xFF) << 8) | ((pal[i].b & 0xFF) << 0);
+		palette[i] = ((pal[i].r & 0xFF) << 0) | ((pal[i].g & 0xFF) << 8) | ((pal[i].b & 0xFF) << 16);
 	}
 
 	display_write_palette(palette);
